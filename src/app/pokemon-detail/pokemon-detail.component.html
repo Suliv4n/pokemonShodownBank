@@ -1,0 +1,42 @@
+<div class="pokemonDetail">
+	<div>
+    {{pokemon.name}}
+  </div>
+  <div>
+    <input type="text" [(ngModel)]="pokemon.name"/>
+  </div>
+
+	<ul class="pokemonStatsList">
+		<li class="pokemonStatsList-item" *ngFor="let stat of stats | values">
+			<div class="pokemonStat">
+				
+				
+				<div class="pokemonStat-label">{{stat.name}}</div>
+				
+				<div class="pokemonStat-values">
+					<div class="pokemonStat-value">
+						<label class="pokemonStat-valuesLabel">EV</label>
+						<app-input-range
+							#item
+							[minimum]="0" 
+							[maximum]="252"
+							[ngModel]="pokemon.getEffortValue(stat.id)" 
+							(ngModelChange)="pokemon.setEffortValue(stat.id, $event);item.value=pokemon.getEffortValue(stat.id)"
+						>
+						</app-input-range>
+					</div>
+				</div>
+				
+
+				<span class="pokemonStatValue-effortValue">{{pokemon.effortValues[stat.id]}}</span>
+				<span class="pokemonStatValue-indivualValue">{{pokemon.individualValues[stat.id]}}</span>
+			</div>
+		</li>
+	</ul>
+
+
+</div>
+
+<pre>
+{{ pokemon | json }}
+</pre>
