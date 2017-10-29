@@ -6,33 +6,55 @@
     <input type="text" [(ngModel)]="pokemon.name"/>
   </div>
 
-	<ul class="pokemonStatsList">
-		<li class="pokemonStatsList-item" *ngFor="let stat of stats | values">
-			<div class="pokemonStat">
-				
-				
-				<div class="pokemonStat-label">{{stat.name}}</div>
-				
-				<div class="pokemonStat-values">
-					<div class="pokemonStat-value">
-						<label class="pokemonStat-valuesLabel">EV</label>
-						<app-input-range
-							#item
-							[minimum]="0" 
-							[maximum]="252"
-							[ngModel]="pokemon.getEffortValue(stat.id)" 
-							(ngModelChange)="pokemon.setEffortValue(stat.id, $event);item.value=pokemon.getEffortValue(stat.id)"
-						>
-						</app-input-range>
-					</div>
-				</div>
-				
 
-				<span class="pokemonStatValue-effortValue">{{pokemon.effortValues[stat.id]}}</span>
-				<span class="pokemonStatValue-indivualValue">{{pokemon.individualValues[stat.id]}}</span>
-			</div>
-		</li>
-	</ul>
+	<table class="pokemonStatsTable">
+		<thead>
+			<th></th>
+			<th>Base</th>
+			<th>EVs</th>
+			<th>IVs</th>
+			<th>Nature</th>
+		</thead>
+		<tbody>
+			<tr *ngFor="let stat of stats | values" class="pokemonStat">
+				<td class="pokemonStat-name">
+					{{stat.name}}
+				</td>
+				<td class="pokemonStat-value">
+					<span class="pokemonStat-valueBase">
+						{{pokemon.species.baseStats[stat.id]}}
+					</span>
+					<app-bar [current]="pokemon.getStatValue(stat.id)" [maximum]="714"></app-bar>
+					<span class="pokemonStat-valueCalculated">
+						{{pokemon.getStatValue(stat.id)}}
+					</span>
+				</td>
+				<td>
+					<app-input-range
+						#EVsRange
+						[minimum]="0" 
+						[maximum]="252"
+						[ngModel]="pokemon.getEffortValue(stat.id)" 
+						(ngModelChange)="pokemon.setEffortValue(stat.id, $event);EVsRange.value=pokemon.getEffortValue(stat.id)"
+					>
+					</app-input-range>
+				</td>
+				<td>
+					<app-input-range
+						#IVsRange
+						[minimum]="0" 
+						[maximum]="31"
+						[ngModel]="pokemon.getIndivualValue(stat.id)" 
+						(ngModelChange)="pokemon.setIndivualValue(stat.id, $event);IVsRange.value=pokemon.getIndivualValue(stat.id)"
+					>
+					</app-input-range>
+				</td>
+				<td>
+
+				</td>
+			</tr>
+		</tbody>
+	</table>
 
 
 </div>

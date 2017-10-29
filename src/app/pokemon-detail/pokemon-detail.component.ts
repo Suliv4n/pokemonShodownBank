@@ -8,13 +8,12 @@ import { STATS } from './../model/stats';
     styleUrls: ['./pokemon-detail.component.css'],
 })
 export class PokemonDetailComponent  { 
-    private _pokemon : Pokemon = new Pokemon("Carapuce");
-    stats = STATS;
+    private _pokemon : Pokemon = new Pokemon("Dracaufeu");
+    public stats = STATS;
 
 
     public get pokemon(): Pokemon{
       return this._pokemon
     }
 
-    
 }

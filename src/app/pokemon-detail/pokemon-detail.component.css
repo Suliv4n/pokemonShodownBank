@@ -1,0 +1,4 @@
+.pokemonStat-valueBase {
+    display: inline-block;
+    min-width: 30px;
+}

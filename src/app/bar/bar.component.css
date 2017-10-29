@@ -1,0 +1,10 @@
+.bar {
+    width: 200px;
+    height: 10px;
+    display: inline-block;
+}
+
+.bar-content {
+    height: 10px;
+    background-color: #00ffaa;
+}

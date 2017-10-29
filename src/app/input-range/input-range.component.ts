@@ -27,13 +27,13 @@ export class InputRangeComponent implements OnInit, ControlValueAccessor{
     
     private position: number = 0;
     
-    propagateChange = (_: any) => {};
+    private propagateChange = (_: any) => {};
     
     constructor(private element: ElementRef) { }
     
     
     /* start dragging */
-    mousedown() : void {
+    public mousedown() : void {
         this.dragging = true;
     }
     
@@ -89,11 +89,11 @@ export class InputRangeComponent implements OnInit, ControlValueAccessor{
         return this.element.nativeElement.querySelector(".js-inputRange-bar");
     }
     
-    release() : void {
+    public release() : void {
         this.dragging = false;    
     }
     
-    ngOnInit() {
+    public ngOnInit() {
         /* stop dragging on mouse up anywhere on window */
         window.addEventListener("mouseup", () => this.release());
         
@@ -103,15 +103,15 @@ export class InputRangeComponent implements OnInit, ControlValueAccessor{
         this.updateValue(this._value);
     }
     
-    writeValue(value: any) {
+    public writeValue(value: any) : void{
         this.updateValue(value);
     }
 
-    registerOnChange(fn) {
+    public registerOnChange(fn) : void{
         this.propagateChange = fn;
     }
     
-    registerOnTouched() {
+    public registerOnTouched() {
         
     }
     
@@ -119,7 +119,7 @@ export class InputRangeComponent implements OnInit, ControlValueAccessor{
         this.updateValue(value);
     }
     
-    get value() {
+    get value() : number{
         return this._value;    
     }
 }
