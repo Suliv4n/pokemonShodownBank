@@ -50,7 +50,21 @@
 					</app-input-range>
 				</td>
 				<td>
-
+					<input 
+						type="checkbox" 
+						name="natureBonus" 
+						[ngModel]="bonusStatNature && bonusStatNature === stat" 
+						(ngModelChange)="changeNatureBonus($event, stat)" 
+						[value]="stat" 
+						*ngIf="stat.id !== stats.HP.id"
+					>
+					<input 
+						type="checkbox"
+						name="natureMalus" 
+						[ngModel]="malusStatNature && malusStatNature === stat" 
+						(ngModelChange)="changeNatureMalus($event, stat)" 
+						[value]="stat" 
+						*ngIf="stat.id !== stats.HP.id">
 				</td>
 			</tr>
 		</tbody>
@@ -65,5 +79,5 @@
 </div>
 
 <pre>
-{{ pokemon | json }}
+{{ bonusStatNature | json }}
 </pre>

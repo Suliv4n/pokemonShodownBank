@@ -16,8 +16,8 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 export class InputRangeComponent implements OnInit, ControlValueAccessor{
     private dragging : boolean = false;
     
-    @Input() private minimum: number = 0;
-    @Input() private maximum: number = 100;
+    @Input("minimum") private _minimum: number = 0;
+    @Input("maximum") private _maximum: number = 100;
     
     @Input("value") _value: number = 0;
 
@@ -37,7 +37,7 @@ export class InputRangeComponent implements OnInit, ControlValueAccessor{
         this.dragging = true;
     }
     
-    private updateCursorPosition(x: number) : void {
+    private updateCursorPosition(x: number): void {
         var barElement = this.getBarElement();
         var cursorElement = this.getCursorElement();
         var left = x - barElement.getBoundingClientRect().left;
@@ -47,7 +47,7 @@ export class InputRangeComponent implements OnInit, ControlValueAccessor{
         ratio = Math.min(1, ratio);
         ratio = Math.max(0, ratio);
         
-        this._value = ratio * this.maximum + this.minimum; 
+        this._value = ratio * this._maximum + this._minimum; 
         
         if(this.forceInteger) {
             this._value = Math.round(this._value);    
@@ -58,7 +58,7 @@ export class InputRangeComponent implements OnInit, ControlValueAccessor{
         this.propagateChange(this._value);
     }
 
-    private updateValue(value: number) : void {
+    private updateValue(value: number): void {
         
         if(value !== this._value) {
             
@@ -66,14 +66,14 @@ export class InputRangeComponent implements OnInit, ControlValueAccessor{
             var cursorElement = this.getCursorElement();
             
             this._value = value;   
-            this._value = Math.min(this._value, this.maximum);
-            this._value = Math.max(this._value, this.minimum);
+            this._value = Math.min(this._value, this._maximum);
+            this._value = Math.max(this._value, this._minimum);
             
             if(this.forceInteger) {
                 value = Math.round(this._value);    
             }
             
-            let ratio = this._value / (this.maximum - this.minimum);
+            let ratio = this._value / (this._maximum - this._minimum);
             
             this.position = ratio * barElement.offsetWidth - cursorElement.offsetWidth/2;
             
@@ -81,15 +81,15 @@ export class InputRangeComponent implements OnInit, ControlValueAccessor{
         }
     }
 
-    private getCursorElement() : any {
+    private getCursorElement(): any {
         return this.element.nativeElement.querySelector(".js-inputRange-cursor");
     }
     
-    private getBarElement() : any {
+    private getBarElement(): any {
         return this.element.nativeElement.querySelector(".js-inputRange-bar");
     }
     
-    public release() : void {
+    public release(): void {
         this.dragging = false;    
     }
     
@@ -103,11 +103,11 @@ export class InputRangeComponent implements OnInit, ControlValueAccessor{
         this.updateValue(this._value);
     }
     
-    public writeValue(value: any) : void{
+    public writeValue(value: any): void{
         this.updateValue(value);
     }
 
-    public registerOnChange(fn) : void{
+    public registerOnChange(fn): void{
         this.propagateChange = fn;
     }
     
@@ -119,7 +119,15 @@ export class InputRangeComponent implements OnInit, ControlValueAccessor{
         this.updateValue(value);
     }
     
-    get value() : number{
+    get value(): number{
         return this._value;    
+    }
+
+    get maximum(): number{
+        return this._maximum;
+    }
+
+    get minimum(): number{
+        return this._minimum;
     }
 }

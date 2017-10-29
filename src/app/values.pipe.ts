@@ -3,7 +3,7 @@ import {Pipe, PipeTransform} from '@angular/core';
 
 @Pipe({name: 'values'})
 export class ValuesPipe implements PipeTransform {
-    transform(value: object, args?: any[]): any[] {
+    transform(value: object): any[] {
 
         let keyArr: any[] = Object.keys(value),
             dataArr = [];

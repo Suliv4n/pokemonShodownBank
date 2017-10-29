@@ -67,10 +67,10 @@ export class Nature {
      */
     public getStatModifier(statId: number): number{
 
-        if(statId === this._bonusStat.id){
+        if(this._bonusStat !== null && statId === this._bonusStat.id){
             return NATURE_BONUS_MODIFIER;
         }
-        if(statId === this._malusStat.id){
+        if(this._malusStat !== null &&  statId === this._malusStat.id){
             return NATURE_MALUS_MODIFIER;
         }
 
@@ -96,7 +96,7 @@ export const NATURES = {
     13: new Nature(13, "Pudique", "bashful"),
     14: new Nature(14, "Prudent", "careful", STATS.SPECIAL_DEFENSE, STATS.SPECIAL_ATTACK),
     15: new Nature(15, "Foufou", "rash", STATS.SPECIAL_ATTACK, STATS.SPECIAL_DEFENSE),
-    16: new Nature(16, "Hardi", "jolly", STATS.SPEED, STATS.SPECIAL_ATTACK),
+    16: new Nature(16, "Jovial", "jolly", STATS.SPEED, STATS.SPECIAL_ATTACK),
     17: new Nature(17, "Mauvais", "naughty", STATS.ATTACK, STATS.SPECIAL_DEFENSE),
     18: new Nature(18, "Lâche", "lax", STATS.DEFENSE, STATS.SPECIAL_DEFENSE),
     19: new Nature(19, "Bizarre", "quirky"),

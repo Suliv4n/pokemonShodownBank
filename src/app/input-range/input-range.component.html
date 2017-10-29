@@ -1,12 +1,14 @@
 <div class="inputRange">
-	<div class="inputRange-bar js-inputRange-bar" >
-		<div 
-			class="inputRange-cursor js-inputRange-cursor"
-			[ngClass]="dragging ? 'inputRange-cursor--dragging' : ''"
-			(mousedown)="mousedown()"
-			[style.left]="position+'px'"
-		>
+	<div class="inputRange-barContainer">
+		<div class="inputRange-bar js-inputRange-bar" >
+			<div 
+				class="inputRange-cursor js-inputRange-cursor"
+				[ngClass]="dragging ? 'inputRange-cursor--dragging' : ''"
+				(mousedown)="mousedown()"
+				[style.left]="position+'px'"
+			>
+			</div>
 		</div>
 	</div>
-	<input type="hidden" [(ngModel)]="value" [name]="name"/>
+	<input type="number" [min]="minimum" [max]="maximum" [(ngModel)]="value" [name]="name" class="inputRange-input"/>
 </div>
