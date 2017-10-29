@@ -56,6 +56,11 @@
 		</tbody>
 	</table>
 
+	<select [(ngModel)]="pokemon.nature">
+		<option *ngFor="let nature of natures | values" [ngValue]="nature">
+			{{nature.description}} 
+		</option>
+	</select>
 
 </div>
 

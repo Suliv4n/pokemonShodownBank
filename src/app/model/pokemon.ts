@@ -1,5 +1,6 @@
 import { STATS } from './stats';
 import { PokemonSpecies } from './pokemon-species';
+import { Nature, NATURES } from './nature';
 
 const MAXIMUM_EFFORT_VALUE_BY_STAT = 255;
 const MAXIMUM_EFFORT_VALUES = 510;
@@ -38,6 +39,11 @@ export class Pokemon {
     private _species: PokemonSpecies;
 
     /**
+     * The pokemon nature
+     */
+    private _nature: Nature = NATURES[3];
+
+    /**
      * Construct a pokemon.
      * 
      * @param _name The pokemon name.
@@ -65,8 +71,8 @@ export class Pokemon {
         baseStat[STATS.HP.id] = 78;
         baseStat[STATS.ATTACK.id] = 84;
         baseStat[STATS.DEFENSE.id] = 78;
-        baseStat[STATS.SPECIAL_DEFENSE.id] = 109;
-        baseStat[STATS.SPECIAL_ATTACK.id] = 85;
+        baseStat[STATS.SPECIAL_DEFENSE.id] = 85;
+        baseStat[STATS.SPECIAL_ATTACK.id] = 109;
         baseStat[STATS.SPEED.id] = 100;
 
         this._species = new PokemonSpecies("Charizard", baseStat);
@@ -106,6 +112,23 @@ export class Pokemon {
      */
     public get individualValues() {
         return Object.assign({}, this._individualValues);    
+    }
+
+    /**
+     * Get the pokemon nature.
+     */
+    public get nature(): Nature {
+        return this._nature;
+    }
+
+
+    /**
+     * Set the pokemon nature.
+     * 
+     * @param nature The new pokemon nature.
+     */
+    public set nature(nature: Nature) {
+        this._nature = nature;
     }
     
     /**
@@ -183,14 +206,14 @@ export class Pokemon {
         let EVBonus: number = Math.floor(this.effortValues[statId]/4);
         let IV: number = this.individualValues[statId];
         let base: number = this._species.baseStats[statId];
-
+        let natureModifier = this._nature.getStatModifier(statId);
 
         switch(statId){
             case(STATS.HP.id):
             total = Math.floor((IV+2*base+EVBonus)*(this._level/100)+10+this._level);
             break;
             default:
-                total = Math.floor((IV+2*base+EVBonus)*(this._level/100)+5);
+                total = Math.floor(Math.floor((IV+2*base+EVBonus)*(this._level/100)+5) * natureModifier);
         }
 
         return total;
