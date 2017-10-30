@@ -17,19 +17,22 @@
 		</thead>
 		<tbody>
 			<tr *ngFor="let stat of stats | values" class="pokemonStat">
-				<td class="pokemonStat-name">
+				<td class="pokemonStat-name pokemonStat-data">
 					{{stat.name}}
 				</td>
 				<td class="pokemonStat-value">
-					<span class="pokemonStat-valueBase">
+					<span class="pokemonStat-valueBase pokemonStat-data">
 						{{pokemon.species.baseStats[stat.id]}}
 					</span>
-					<app-bar [current]="pokemon.getStatValue(stat.id)" [maximum]="714"></app-bar>
+					<app-bar 
+						[current]="pokemon.getStatValue(stat.id)" 
+						[maximum]="714"
+					></app-bar>
 					<span class="pokemonStat-valueCalculated">
 						{{pokemon.getStatValue(stat.id)}}
 					</span>
 				</td>
-				<td>
+				<td class="pokemonStat-data">
 					<app-input-range
 						#EVsRange
 						[minimum]="0" 
@@ -39,7 +42,7 @@
 					>
 					</app-input-range>
 				</td>
-				<td>
+				<td class="pokemonStat-data">
 					<app-input-range
 						#IVsRange
 						[minimum]="0" 
@@ -49,7 +52,7 @@
 					>
 					</app-input-range>
 				</td>
-				<td>
+				<td class="pokemonStat-data">
 					<input 
 						type="checkbox" 
 						name="natureBonus" 
@@ -70,7 +73,7 @@
 		</tbody>
 	</table>
 
-	<select [(ngModel)]="pokemon.nature">
+	<select [ngModel]="pokemon.nature" (ngModelChange)="pokemon.nature=$event;updateSelectedNature($event)">
 		<option *ngFor="let nature of natures | values" [ngValue]="nature">
 			{{nature.description}} 
 		</option>

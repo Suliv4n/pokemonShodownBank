@@ -2,3 +2,15 @@
     display: inline-block;
     min-width: 30px;
 }
+
+.pokemonStat-name {
+    font-style: italic;
+}
+
+.pokemonStat-valueBase {
+    font-weight: bold;
+}
+
+.pokemonStat-data {
+    padding: 5px 10px;
+}

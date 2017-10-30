@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Pokemon } from './../model/pokemon';
 import { STATS, Stat } from './../model/stats';
-import { NATURES } from './../model/nature';
+import { Nature, NATURES } from './../model/nature';
 
 @Component({
     selector: '<app-pokemon-detail>',
@@ -69,7 +69,10 @@ export class PokemonDetailComponent implements OnInit{
                 }
             }
         }
+    }
 
-
+    private updateSelectedNature(nature: Nature): void{
+        this._bonusStatNature = nature.bonusStat;
+        this._malusStatNature = nature.malusStat;
     }
 }

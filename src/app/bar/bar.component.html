@@ -1,3 +1,9 @@
 <div class="bar">
-  <div class="bar-content" [ngStyle]="{'width.px': getBarWidth()}"></div>
+  <div 
+    class="bar-content" 
+    [ngStyle]="
+    {
+      'width.px' : getBarWidth(),
+      'background-color' : getHSLColor()
+    }"></div>
 </div>
